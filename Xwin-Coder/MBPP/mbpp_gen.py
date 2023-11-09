@@ -1,3 +1,4 @@
+import jsonlines
 import argparse
 import pprint
 import sys
@@ -7,11 +8,7 @@ from tqdm import tqdm
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, GenerationConfig
 from human_eval.data import write_jsonl, read_problems, stream_jsonl
-try:
-    from vllm import LLM, SamplingParams
-except:
-    print("vllm not installed, connot add --vllm tag")
-
+from datasets import load_dataset
 if torch.cuda.is_available():
     device = "cuda"
 else:
@@ -23,21 +20,18 @@ try:
 except:
     pass
 
+try:
+    from vllm import LLM, SamplingParams
+except:
+    print("vllm not installed, connot add --vllm tag")
 
-def extract_text(prompt, remove_lines=True):
-    token = '\"\"\"'
-    start = token
-    end = '>>>'
+def read_mbpp():
+    mbpp_problems = {}
+    ds = list(load_dataset("mbpp")["test"])
+    for obj in ds:
+        mbpp_problems[obj["task_id"]] = obj
+    return mbpp_problems
 
-    start_idx = prompt.find(start) + len(start)
-    end_idx = prompt.find(end)
-
-    output = prompt[start_idx: end_idx]
-    if remove_lines:
-        output = output.replace('\n', ' ')
-    output = re.sub(r"\s+", " ", output).strip()
-
-    return output
 
 def generate_prompt(input):
     return f"""<system>: You are an AI coding assistant that helps people with programming. Write a response that appropriately completes the user's request.
@@ -47,8 +41,8 @@ def generate_prompt(input):
 
 def get_model(
     load_8bit: bool = False,
-    base_model: str = "bigcode/starcoder",
-    page_attention: bool = False
+    base_model: str = "",
+    page_attention: bool = True
 ):
     if not page_attention:
         assert base_model, (
@@ -93,15 +87,16 @@ def get_model(
         return tokenizer, model
 
 
+
 def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--model', type=str, default='bigcode/starcoder', help="")
-    parser.add_argument('--vllm', action='store_true', default = False, help='')
     parser.add_argument('--output_path', type=str, help="")
     parser.add_argument('--start_index', type=int, default=0, help="")
     parser.add_argument('--end_index', type=int, default=164, help="")
     parser.add_argument('--temperature', type=float, default=0.8, help="")
+    parser.add_argument('--vllm', action='store_true', default = False, help='')
     parser.add_argument('--N', type=int, default=200, help="")
     parser.add_argument('--max_len', type=int, default=512, help="")
     parser.add_argument('--decoding_style', type=str, default='sampling', help="")
@@ -113,15 +108,34 @@ def main():
     argsdict = vars(args)
     print(pprint.pformat(argsdict))
 
-    problems = read_problems()
+    problems = read_mbpp()
 
     task_ids = sorted(problems.keys())[args.start_index: args.end_index]
-    prompts = [problems[task_id]['prompt'] for task_id in task_ids]
+    prompts = []
+    for task_id in task_ids:
+        prompt = f"\n{problems[task_id]['text']}\nTest examples:"
+        if task_id == 493:
+            # The test examples are too long. We choose to only include the function name.
+            test_example = problems[task_id]['test_list'][0]
+            prompt += f"\ncalculate_polygons(startx, starty, endx, endy, radius)"
+        else:
+            for test_example in problems[task_id]['test_list']:
+                prompt += f"\n{test_example}"
+        prompts.append(prompt)
+    
     num_samples = len(prompts)
     print("Number of samples: {}".format(num_samples))
 
     tokenizer, model = get_model(base_model=args.model, page_attention=args.vllm)
-    
+    generation_config = GenerationConfig(
+        pad_token_id=tokenizer.pad_token_id,
+        do_sample=True if args.temperature>0 else False,
+        temperature=args.temperature,
+        max_length=args.max_len,
+        num_return_sequences=args.num_seqs_per_iter,
+        eos_token_id=tokenizer.eos_token_id,
+        top_p=0.95
+    )
 
     print(f"Loaded {args.model}.")
     for i in tqdm(range(num_samples), ncols=0, total=num_samples):
@@ -175,7 +189,7 @@ def main():
                     for seq_idx, gen_seq in enumerate(gen_seqs):
                         completion_seq = gen_seq
                         
-                        completion_seq = gen_seq.split("<AI>: ")[1]
+                        completion_seq = completion_seq.split("<AI>:")[1]
 
                         completion_seq = completion_seq.replace('\t', '    ')
                         all_code = gen_seq.replace('\t', '    ')
@@ -188,16 +202,13 @@ def main():
                         )
         else:
             
-            #prompt_batch: [prompt]
-            # encoding = tokenizer(prompt_batch, return_tensors="pt", truncation=True, max_length=args.max_len).to(device)
             sampling_params = SamplingParams(
-                temperature=args.temperature,
-                max_tokens=args.max_len,
-                n=args.num_seqs_per_iter,
-                top_p=0.95 if not args.temperature==0 else 1,
-                stop=[tokenizer.eos_token]
-            )
-
+                    temperature=args.temperature,
+                    max_tokens=args.max_len,
+                    n=args.num_seqs_per_iter,
+                    top_p=0.95 if not args.temperature==0 else 1
+                )
+            
             if args.decoding_style == 'sampling':
                 loops = int(args.N / args.num_seqs_per_iter)
             else:

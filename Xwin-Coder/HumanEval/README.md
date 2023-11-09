@@ -1,6 +1,6 @@
 # Evaluating HumanEval
 
-![Chat demo](../docs/humaneval.png)
+![he demo](../docs/humaneval.png)
 ## Introduction
 This is an evaluation harness for the HumanEval problem solving dataset described in the paper "Evaluating Large Language Models Trained on Code". It used to measure functional correctness for synthesizing programs from docstrings. It consists of 164 original programming problems, assessing language comprehension, algorithms, and simple mathematics, with some comparable to simple software interview questions.[[1]](https://paperswithcode.com/paper/evaluating-large-language-models-trained-on)
 
