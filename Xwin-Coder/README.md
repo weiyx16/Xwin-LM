@@ -5,7 +5,7 @@
 [![Model Weight License](https://img.shields.io/badge/Model%20Weights%20License-bigscience%20OpenRAIL%20M%20v1-yellow)](MODEL_WEIGHTS_LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/) -->
 
-This folder is used to evaluate and reproduce the results of our code assistent model XwinCoder: A series of models that adapte instruction finetuning starting from open-source pretrained models. Also, this folder provide a complete codebase for evaluating instruction finetuned model, as existing codebase like [bigcode-evaluation-harness](https://github.com/bigcode-project/bigcode-evaluation-harness/tree/main) mainly evaluate pretrained base models. To facilitate the researchers to do ablation experiments and decrease set up burden, we seperate the evaluation of each task instead of integrating them into a single framework. 
+This folder is used to evaluate and reproduce the results of our code assistent model XwinCoder: A series of models that adapte instruction finetuning starting from open-source pretrained models. Also, this folder provide a complete codebase for evaluating instruction finetuned models, as existing codebases like [bigcode-evaluation-harness](https://github.com/bigcode-project/bigcode-evaluation-harness/tree/main) mainly evaluate pretrained base models. To facilitate the researchers to do ablation experiments and decrease set-up burden, we seperate the evaluation of each task instead of integrating them into a single framework. 
 
 ## Updates
 
