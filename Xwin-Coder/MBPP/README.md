@@ -13,14 +13,14 @@ Our Xwin-Coder reached highest pass@1 accuracy among open source published model
 | CodeLLaMA-Instruct[[2]](https://arxiv.org/pdf/2308.12950.pdf) | 7B |  √  | 44.4 | 65.4 | 76.8 |
 | **XwinCoder**  | 7B |  √  |  **57.4** | **73.0** | **83.7** |
 |-------------------------|-------------|---------------|--------|----------|------------|
-| CodeLLaMA-Instruct[[2]](https://arxiv.org/pdf/2308.12950.pdf) | 13B |  √  | 49.4 | 71.2 | 84.1 |
+| CodeLLaMA-Instruct[[2]](https://arxiv.org/pdf/2308.12950.pdf) | 13B |  √  | 49.4 | 71.2 | **84.1** |
 | WizardCoder[[3]](https://arxiv.org/pdf/2306.08568.pdf) | 15B |  √  | 51.8 | - | - |
-| **XwinCoder** | 13B |  √  |  **60.1**  | 0.0  | 0.0  |
+| **XwinCoder** | 13B |  √  |  **60.1**  | **74.6**  | 83.9  |
 |-------------------------|-------------|---------------|--------|----------|------------|
 | CodeLLaMA-Instruct[[2]](https://arxiv.org/pdf/2308.12950.pdf) | 34B |  √  |  57.0  | 74.6 | 85.4 |
 | UnNatural-CodeLLaMA[[2]](https://arxiv.org/pdf/2308.12950.pdf) | 34B |  ×  | 61.2  | **76.6**  |  **86.7**  |
-| GPT-3.5-Turbo[[5]](https://github.com/deepseek-ai/deepseek-coder) | - |  ×  |  70.8  | -  | -  |
-| GPT-4[[5]](https://github.com/deepseek-ai/deepseek-coder) | - |  ×  | **80.0**  | -  | -  |
+| GPT-3.5-Turbo[[4]](https://github.com/deepseek-ai/deepseek-coder) | - |  ×  |  70.8  | -  | -  |
+| GPT-4[[4]](https://github.com/deepseek-ai/deepseek-coder) | - |  ×  | **80.0**  | -  | -  |
 | **XwinCoder** | 34B |  √  | 64.8  | 75.7  | 84.3  |
 
 ## How to Evaluate
