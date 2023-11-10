@@ -16,6 +16,9 @@ This folder is used to evaluate and reproduce the results of our code assistent 
 ## Overview
 
 ![Chat demo](docs/rader.png)
+
+As shown in the image, our 34B model is on bar with or surpass GPT-3.5-turbo in every perspective of coding abilities, while still have a margin with GPT-4. To avoid misleading, this rader graph does not scale the y axis, but only shift for aesthetic (except for MT-Bench, we scale by 10x). This makes the margins in the graph are trust worthy. 
+
 ## Contents
 
 1. [Setting Up](#setting-up)
