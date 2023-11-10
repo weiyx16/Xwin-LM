@@ -17,7 +17,7 @@ This folder is used to evaluate and reproduce the results of our code assistent 
 
 ![Chat demo](docs/rader.png)
 
-As shown in the image, our 34B model is on bar with or surpass GPT-3.5-turbo in every perspective of coding abilities, while still have a margin with GPT-4. To avoid misleading, this rader graph does not scale the y axis, but only shift for aesthetic (except for MT-Bench, we scale by 10x). This makes the margins in the graph are trust worthy. 
+As shown in the image, our 34B model is on bar with or surpass GPT-3.5-turbo in every perspective of coding abilities, while still have a margin with GPT-4. To avoid misleading, this rader graph does not scale the y axis, but only shift for aesthetic (except for MT-Bench, we scale by 10x). This makes the margins in the graph trust worthy. HumenEval, as the most popular and recognized benchmarks, many recent works have reached high result on it but large margin still exists on real world testing experience. So we suggest evaluating on multiple perspectives of coding ability. 
 
 ## Contents
 
