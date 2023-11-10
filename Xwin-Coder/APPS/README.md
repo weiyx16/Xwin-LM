@@ -6,7 +6,7 @@
 
 The APPS dataset consists of problems collected from different open-access coding websites such as Codeforces, Kattis, and more. The APPS benchmark attempts to mirror how humans programmers are evaluated by posing coding problems in unrestricted natural language and evaluating the correctness of solutions. The problems range in difficulty from introductory to collegiate competition level and measure coding ability as well as problem-solving.[[1]](https://github.com/hendrycks/apps)
 
-Our models reached new SOTA results over all open source models, and surpass GPR-3.5-turbo:
+Our models reached new SOTA results over all open source models, and surpass GPT-3.5-turbo:
 
 | Model | Size | Pass@ | Introductory |  Interview  | Competition |
 |----|----|----|----|----|----|
@@ -47,4 +47,4 @@ bash merge_and_visual.sh
 ```
 
 ## Further information
-The results of GPT-3.5-turbo and GPT-4 are evaluated by prompting the model to "Answer the following code contest problem and return a fully runable code: ". If you need those results, please kindly cite this repo.
+The results of GPT-3.5-turbo and GPT-4 are evaluated by prompting the model to "Answer the following code contest problem and return a fully runnable code: ". If you need those results, please kindly cite this repo.
