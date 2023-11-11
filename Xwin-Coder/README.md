@@ -5,7 +5,7 @@
 [![Model Weight License](https://img.shields.io/badge/Model%20Weights%20License-bigscience%20OpenRAIL%20M%20v1-yellow)](MODEL_WEIGHTS_LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/) -->
 
-This folder is used to evaluate and reproduce the results of our code assistent model XwinCoder: A series of models that adapte instruction finetuning starting from open-source pretrained models. Also, this folder provide a complete codebase for evaluating instruction finetuned models, as existing codebases like [bigcode-evaluation-harness](https://github.com/bigcode-project/bigcode-evaluation-harness/tree/main) mainly evaluate pretrained base models. To facilitate the researchers to do ablation experiments and decrease set-up burden, we seperate the evaluation of each task instead of integrating them into a single framework. 
+This folder is used to evaluate and reproduce the results of our code assistent model XwinCoder: A series of models that are instruction- finetuned from open-source pretrained models. Also, this folder can serve as a complete codebase for evaluating code-related capabilities of instruction finetuned models, whereas existing codebases like [bigcode-evaluation-harness](https://github.com/bigcode-project/bigcode-evaluation-harness/tree/main) are mainly designed for pretrained base models. To facilitate the researchers to do ablation experiments and decrease set-up burden, we seperate the evaluation of each task instead of integrating them into a single framework. 
 
 ## Updates
 
@@ -17,7 +17,9 @@ This folder is used to evaluate and reproduce the results of our code assistent 
 
 ![Chat demo](docs/rader.png)
 
-As shown in the image, our 34B model is on bar with or surpass GPT-3.5-turbo in every perspective of coding abilities, while still have a margin with GPT-4. To avoid misleading, this rader graph does not scale the y axis, but only shift for aesthetic (except for MT-Bench, we scale by 10x). This makes the margins in the graph trust worthy. HumenEval, as the most popular and recognized benchmarks, many recent works have reached high result on it but large margin still exists on real world testing experience. So we suggest evaluating on multiple perspectives of coding ability. 
+* To fully demonstrate our model's coding capabilities in real-world usage scenarios, we have conducted thorough evaluations on several existing mainstream coding capability leaderboards (rather than only on the currently most popular HumanEval).   
+* As shown in the radar chart results, our 34B model **achieves comparable performance as GPT-3.5-turbo**. 
+* It is worth mentioning that, to ensure accurate visualization, our radar chart has not been scaled (only translated; MT-Bench score is scaled by 10x to be more comparable with other benchmarks).
 
 ## Contents
 
