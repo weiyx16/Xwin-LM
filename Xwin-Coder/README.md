@@ -9,7 +9,7 @@ This folder is used to evaluate and reproduce the results of our code assistent 
 
 ## Updates
 
-- ❗We released  [**XWinCoder-7B-base-codellama**](https://huggingface.co/), [**XWinCoder-13B-base-codellama**](https://huggingface.co/), [**XWinCoder-34B-base-codellama**](https://huggingface.co/)
+- ❗We released  [**XwinCoder-7B-base-codellama**](https://huggingface.co/), [**XwinCoder-13B-base-codellama**](https://huggingface.co/), [**XwinCoder-34B-base-codellama**](https://huggingface.co/)
 
 - ❗We support evaluating instruction finetuned models on [HumanEval](HumanEval/README.md), [MBPP](MBPP/README.mb), [APPS](APPS/README.mb), [DS1000](DS1000/README.mb), [Multipl-E](Multipl_E/README.md) and [MT-Bench](MT_bench/README.mb)
 
