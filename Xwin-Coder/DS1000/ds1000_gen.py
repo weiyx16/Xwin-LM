@@ -62,12 +62,6 @@ def change_format(txt):
         prompt = prompt + "You should write codes ending with: \n" + require
     return prompt, precode
         
-# def generate_prompt(input):
-#     return f"""<system>: You are an AI coding assistant that helps people with programming. Write a response that appropriately completes the user's request.
-# <user>: Complete the following task and return a fully runable code.
-# {input}
-# <AI>: """
-
 def generate_prompt(input):
     pattern = re.compile(r"A:.*?<code>", re.DOTALL) 
     QAL = re.split(pattern, input)
@@ -97,24 +91,6 @@ def generate_prompt(input):
 {precode}
 """
 
-# from copy import deepcopy
-# def generate_prompt(input):
-#     prompt = deepcopy(input)
-    
-#     if "\nA:" in prompt:
-#         prompt = prompt.replace("A:", "<AI>: ")
-#         prompt = prompt.replace("<code>", "```python\n")
-#         prompt = prompt.replace("</code>", "```")
-#         return f"""<system>: You are an AI coding assistant that helps people with programming. Write a response that appropriately completes the user's request.
-# <user>: {prompt}"""
-#     else:
-#         assert "<code>" not in prompt
-#         return f"""<system>: You are an AI coding assistant that helps people with programming. Write a response that appropriately completes the user's request.
-# <user>: Complete the task in the comment and return a fully runable code.
-# {prompt}
-# <AI>: Here is the solution: ```python
-# {prompt}
-# """
 
 def get_model(
     load_8bit: bool = False,
@@ -159,7 +135,7 @@ def get_model(
         )
         assert not load_8bit, NotImplementedError
         tokenizer = AutoTokenizer.from_pretrained(base_model)
-        model = LLM(model=base_model, dtype = "float16", max_model_len=8192)
+        model = LLM(model=base_model, dtype = "float16")
         return tokenizer, model
 
 
@@ -179,7 +155,6 @@ def main():
     parser.add_argument('--decoding_style', type=str, default='sampling', help="")
     parser.add_argument('--num_seqs_per_iter', type=int, default=50, help='')
     parser.add_argument('--overwrite', action='store_true', help='')
-    parser.add_argument('--prompt-type', type=str, default='Lazy-ZMS', help="")
 
     args = parser.parse_args()
 

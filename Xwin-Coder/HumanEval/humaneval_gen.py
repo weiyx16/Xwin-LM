@@ -86,10 +86,7 @@ def get_model(
         )
         assert not load_8bit, NotImplementedError
         tokenizer = AutoTokenizer.from_pretrained(base_model)
-        try:
-            model = LLM(model=base_model, dtype = "float16", max_model_len=8192)
-        except:
-            model = LLM(model=base_model, dtype = "float16")
+        model = LLM(model=base_model, dtype = "float16")
         return tokenizer, model
 
 

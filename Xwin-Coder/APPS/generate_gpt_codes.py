@@ -53,94 +53,48 @@ def reindent_code(codestr):
     return ret.getvalue()
 
 def generate_prompt(args, test_case_path, prompt_path, solutions_path, tokenizer, starter_path=None):
-    if args.prompt_type == "WizardCoder":
-        _input = """Below is an instruction that describes a task. Write a response that appropriately completes the request.
-
-### Instruction:
-Answer the following code contest problem:
-"""
-        with open(prompt_path, "r") as f:
-            data = f.readlines()
-            data = "".join(data)
-        _input += data
-        if starter_path != None:
-            with open(starter_path, "r") as f:
-                data = f.readlines()
-                data = "".join(data)
-                data = "\n" + data #+ "\n"
-            _input += data
-        else:
-            #_input += "\n\n"
-            pass
-
-        with open(test_case_path, "r") as f:
-            data = json.load(f)
-        if not data.get("fn_name"):
-            _input += "\nUse Standard Input format"#\n"
-        else:
-            _input += "\nUse Call-Based format"#\n"
-        
-        _input += "\n### Response:\n"
-
-        if args.peeking > 0.0:
-            # Need to do some peeking. 
-
-            # Read one example solution
-            with open(solutions_path, 'r') as f:
-                sols = json.load(f)
-            sample_sol = random.choice(sols)
-            rand_sol = reindent_code(sample_sol)
-            rand_sol = tokenizer.encode(rand_sol, verbose=False)
-            tokens_taken = int(args.peek_frac * len(rand_sol))
-            rand_sol = rand_sol[:tokens_taken]
-            _input += tokenizer.decode(rand_sol)
-        else:
-            sample_sol = None
-
-        return _input, sample_sol
-    elif args.prompt_type=="ZMS":
-        _input = """<system>: You are an AI coding assistant that helps people with programming. Write a response that appropriately completes the user's request.
+    _input = """<system>: You are an AI coding assistant that helps people with programming. Write a response that appropriately completes the user's request.
 <user>: Answer the following code contest problem and return a fully runable code:
 """
-        with open(prompt_path, "r") as f:
+    with open(prompt_path, "r") as f:
+        data = f.readlines()
+        data = "".join(data)
+    _input += data
+    if starter_path != None:
+        with open(starter_path, "r") as f:
             data = f.readlines()
             data = "".join(data)
+            data = "\n" + data #+ "\n"
         _input += data
-        if starter_path != None:
-            with open(starter_path, "r") as f:
-                data = f.readlines()
-                data = "".join(data)
-                data = "\n" + data #+ "\n"
-            _input += data
-        else:
-            #_input += "\n\n"
-            pass
+    else:
+        #_input += "\n\n"
+        pass
 
-        with open(test_case_path, "r") as f:
-            data = json.load(f)
-        if not data.get("fn_name"):
-            _input += "\nUse Standard Input format"#\n"
-        else:
-            _input += "\nUse Call-Based format"#\n"
-        
-        _input += "\n<AI>: "
+    with open(test_case_path, "r") as f:
+        data = json.load(f)
+    if not data.get("fn_name"):
+        _input += "\nUse Standard Input format"#\n"
+    else:
+        _input += "\nUse Call-Based format"#\n"
+    
+    _input += "\n<AI>: "
 
-        if args.peeking > 0.0:
-            # Need to do some peeking. 
+    if args.peeking > 0.0:
+        # Need to do some peeking. 
 
-            # Read one example solution
-            with open(solutions_path, 'r') as f:
-                sols = json.load(f)
-            sample_sol = random.choice(sols)
-            rand_sol = reindent_code(sample_sol)
-            rand_sol = tokenizer.encode(rand_sol, verbose=False)
-            tokens_taken = int(args.peek_frac * len(rand_sol))
-            rand_sol = rand_sol[:tokens_taken]
-            _input += tokenizer.decode(rand_sol)
-        else:
-            sample_sol = None
+        # Read one example solution
+        with open(solutions_path, 'r') as f:
+            sols = json.load(f)
+        sample_sol = random.choice(sols)
+        rand_sol = reindent_code(sample_sol)
+        rand_sol = tokenizer.encode(rand_sol, verbose=False)
+        tokens_taken = int(args.peek_frac * len(rand_sol))
+        rand_sol = rand_sol[:tokens_taken]
+        _input += tokenizer.decode(rand_sol)
+    else:
+        sample_sol = None
 
-        return _input, sample_sol
+    return _input, sample_sol
 
 
 def main(args):
@@ -234,7 +188,10 @@ def main(args):
                     output_ids = model.generate(
                         input_ids,
                         num_beams=args.num_beams,
-                        early_stopping=True,
+                        early_stopping=True if args.num_beams>1 else False,
+                        do_sample=True if args.temperature>0 else False,
+                        temperature=args.temperature,
+                        top_p=0.95 if args.temperature>0 else 1.0,
                         max_length=1024 - len(input_ids)
                     )
                     output_str = tokenizer.decode(output_ids[0])
@@ -300,7 +257,6 @@ if __name__ == "__main__":
     parser.add_argument("--save", type=str, default="./results")
     parser.add_argument("--vllm", action="store_false", default=True)
     parser.add_argument("--N", default=1, type=int)
-    parser.add_argument('--prompt-type', type=str, default='ZMS', help="")
     args = parser.parse_args()
 
     main(args)

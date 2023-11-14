@@ -9,17 +9,18 @@ This folder is used to evaluate and reproduce the results of our code assistent 
 
 ## Updates
 
-- ❗We released  [**XwinCoder-7B-base-codellama**](https://huggingface.co/), [**XwinCoder-13B-base-codellama**](https://huggingface.co/), [**XwinCoder-34B-base-codellama**](https://huggingface.co/)
+- ❗We released  [**XwinCoder-7B**]((https://huggingface.co/Xwin-LM/XwinCoder-7B)), [**XwinCoder-13B**]((https://huggingface.co/Xwin-LM/XwinCoder-13B)), [**XwinCoder-34B**]((https://huggingface.co/Xwin-LM/XwinCoder-34B))
 
-- ❗We support evaluating instruction finetuned models on [HumanEval](HumanEval/README.md), [MBPP](MBPP/README.mb), [APPS](APPS/README.mb), [DS1000](DS1000/README.mb), [Multipl-E](Multipl_E/README.md) and [MT-Bench](MT_bench/README.mb)
+- ❗We support evaluating instruction finetuned models on [HumanEval](HumanEval/README.md), [MBPP](MBPP/README.mb), [APPS](APPS/README.mb), [DS1000](DS1000/README.mb) and [MT-Bench](MT_bench/README.mb). We also conduct [skywork-data-leakage](SkyWork-Leakage-Testing/README.md) experiments to check whether there are data leakage problems for open source models.
 
 ## Overview
 
 ![Chat demo](docs/rader.png)
 
-* To fully demonstrate our model's coding capabilities in real-world usage scenarios, we have conducted thorough evaluations on several existing mainstream coding capability leaderboards (rather than only on the currently most popular HumanEval).   
-* As shown in the radar chart results, our 34B model **achieves comparable performance as GPT-3.5-turbo**. 
+* To fully demonstrate our model's coding capabilities in real-world usage scenarios, we have conducted thorough evaluations on several existing mainstream coding capability leaderboards (rather than only on the currently most popular HumanEval). 
+* As shown in the radar chart results, our 34B model **achieves comparable performance as GPT-3.5-turbo on coding abilities**. 
 * It is worth mentioning that, to ensure accurate visualization, our radar chart has not been scaled (only translated; MT-Bench score is scaled by 10x to be more comparable with other benchmarks).
+* Multiple-E-avg6 refer to the 6 languages used in CodeLLaMA paper. Results of GPT-4 and GPT-3.5-turbo are conducted by us, more details will be released later.
 
 ## Contents
 
@@ -63,7 +64,9 @@ As mentioned before, this repository is targeting instruction finetuned models. 
 
 Specific evaluation scripts are in the folder of each task.
 
-## Further Details
+## Others
 
 1. Known issues:
     - As our models are trained on the newest torch and transformers, it was observed that evaluating on torch 1.x and very old version of transformers may cause a 2-3% drop on results.
+    - Because there are no general multi-turn chat data used in current version of XwinCoder, they may not comparable with GPT-3.5-turbo on multi-turn chat and general instruction following. We only state that they are comparable on coding ability and benchmarks.
+    - Evaluation code for Multipl-E will be released later.

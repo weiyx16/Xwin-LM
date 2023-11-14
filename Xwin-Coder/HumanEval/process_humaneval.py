@@ -28,7 +28,6 @@ print("{} files in {}".format(len(files), args.path))
 problems = read_problems()
 
 output = []
-a = 0
 for code_file in tqdm(files, total=len(files)):
     codes = [c for c in stream_jsonl(code_file)]
     if args.add_prompt: 
@@ -41,22 +40,16 @@ for code_file in tqdm(files, total=len(files)):
                 def_line = completion.index('```python')
                 completion = completion[def_line:].strip()
                 completion = completion.replace('```python', '')
-                # print(completion)
                 try:
                     next_line = completion.index('```')
                     completion = completion[:next_line].strip()
                 except:
-                    a += 1
-                    print(completion)
-                    print("================\n")
-                # print(completion)
+                    pass
             if "__name__ == \"__main__\"" in completion:
                 next_line = completion.index('if __name__ == "__main__":')
                 completion = completion[:next_line].strip()
-                # print(completion)
             
             if "# Example usage" in completion:
-                # print(completion)
                 next_line = completion.index('# Example usage')
                 completion = completion[:next_line].strip()
             
@@ -66,4 +59,3 @@ for code_file in tqdm(files, total=len(files)):
     
 print("save to {}".format(args.out_path))
 write_jsonl(args.out_path, output)
-print(a)

@@ -21,39 +21,39 @@ We test the $\Delta$ of existing open-source on the huggingface, for pretraining
 
 | Model | $L_{test}$ | $L_{ref}$ | $\Delta$ |  
 |-------|------------|------------|-----------|
-| starcoderbase-1b |  0.613 | 0.597 | 0.017 |
-| starcoderbase-3b |  0.546 | 0.526 | 0.020 |
-|StarCoder-15B|0.479| 0.466 | 0.013 |
-| CodeLLaMA-7B | 0.419 | 0.450 | -0.031 |
-| CodeLLaMA-13B |0.402 | 0.429 | -0.027 |
-| CodeLlaMA-34B | 0.372 | 0.420 | -0.048 |
-| CodeLLaMA-7B-Python | 0.37 | 0.427 | -0.057 |
-| CodeLLaMA-13B-Python | 0.348 | 0.410 | -0.062 |
-| CodeLLaMA-34B-Python | 0.289 | 0.396 | -0.107 |
-| deepseek-coder-1.3b-base | 0.440 | 0.474 | -0.034 |
-| deepseek-7B-base | 0.388 | 0.425 | -0.037 |
-| deepseek-coder-33b-base | 0.378 | 0.412 | -0.034 |
+| [starcoderbase-1b](https://huggingface.co/bigcode/starcoderbase-1b) |  0.613 | 0.597 | 0.017 |
+| [starcoderbase-3b](https://huggingface.co/bigcode/starcoderbase-3b) |  0.546 | 0.526 | 0.020 |
+|[StarCoder-15B](https://huggingface.co/bigcode/starcoder)|0.479| 0.466 | 0.013 |
+| [CodeLLaMA-7B](https://huggingface.co/codellama/CodeLlama-7b-hf) | 0.419 | 0.450 | -0.031 |
+| [CodeLLaMA-13B](https://huggingface.co/codellama/CodeLlama-13b-hf) |0.402 | 0.429 | -0.027 |
+| [CodeLlaMA-34B](https://huggingface.co/codellama/CodeLlama-34b-hf) | 0.372 | 0.420 | -0.048 |
+| [CodeLLaMA-7B-Python](https://huggingface.co/codellama/CodeLlama-7b-Python-hf) | 0.37 | 0.427 | -0.057 |
+| [CodeLLaMA-13B-Python](https://huggingface.co/codellama/CodeLlama-13b-Python-hf) | 0.348 | 0.410 | -0.062 |
+| [CodeLLaMA-34B-Python](https://huggingface.co/codellama/CodeLlama-34b-Python-hf) | 0.289 | 0.396 | -0.107 |
+| [deepseek-coder-1.3b-base](https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-base) | 0.440 | 0.474 | -0.034 |
+| [deepseek-6.7B-base](https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-base) | 0.388 | 0.425 | -0.037 |
+| [deepseek-coder-33b-base](https://huggingface.co/deepseek-ai/deepseek-coder-33b-base) | 0.378 | 0.412 | -0.034 |
 
 For instruction finetuned models, we believe it is more fair to consider $\Delta^2 := \Delta_{SFT} - \Delta_{base}$, where $\Delta_{SFT}$ and $\Delta_{base}$ represent the instruction finetuned model and its base pretraining models. The less $\Delta^2$ means the more data leakage during instruction finetuning stage.
 
 | Model | Base Model | $L_{test}$ | $L_{ref}$ | $\Delta_{SFT}$ |  $\Delta_{base}$ |  $\Delta^2$ | 
 |---|-------|------------|------------|---|-----------|-------|
-| CodeLlama-34b-Instruct | CodeLLaMA-34B-Python | 0.376 | 0.421 | -0.046 | -0.107 | 0.061 |
-| CodeLlama-13b-Instruct | CodeLLaMA-13B-Python |0.393 |  0.424| -0.031|-0.062 | 0.031 |
-| CodeLlama-7b-Instruct | CodeLLaMA-7B-Python | 0.415 | 0.444 | -0.029 | -0.057 | 0.028 |
-| Phind-CodeLlama-34B-v1 |CodeLLaMA-34B-Python | 0.435 | 0.453 | -0.018 | -0.107 | 0.089 |
-| WizardCoder-Python-13B-V1 |CodeLLaMA-13B-Python | 0.414 | 0.486 | -0.072 | -0.062 | -0.010 |
-| WizardCoder-15B-V1.0 | StarCoder-15B| 0.564 | 0.537 | 0.027 |0.013 | 0.014 |
-| WizardCoder-Python-7B-V1.0 |CodeLLaMA-7B-Python | 0.433 | 0.488 | -0.055 | -0.057 | 0.002 |
-| WizardCoder-3B-V1.0  | starcoderbase-3B |0.611 | 0.582 | 0.029 | 0.020 | 0.009 |
-| WizardCoder-1B-V1.0 | starcoderbase-1B |0.666 | 0.644 | 0.022 | 0.017 | 0.005 |
-| WizardCoder-Python-34B-V1.0 |CodeLLaMA-34B-Python | 0.372 | 0.487 | -0.114 | -0.107 | -0.007 |
-| deepseek-coder-1.3b-instruct | deepseek-coder-1.3b-base |0.490 | 0.517 | -0.026 | -0.034 | 0.008 |
-| deepseek-7B-instruct | deepseek-coder-7B-base |0.428 | 0.454 | -0.026 | -0.037 | 0.011 |
-| deepseek-coder-33b-instruct |deepseek-coder-33b-base | 0.368 | 0.399 | -0.032 | -0.034 | 0.002 |
-|XwinCoder-7B| CodeLLaMA-7B-Python | 0.525 | 0.536 | -0.011 | -0.057 | 0.046 |
-|XwinCoder-13B| CodeLLaMA-13B-Python | 0.405 | 0.468 | -0.062 |-0.062 | 0.000 |
-|XwinCoder-34B|CodeLLaMA-34B-Python |0.406| 0.473 | -0.067 |-0.107 | 0.040 |
+| [CodeLlama-7b-Instruct](https://huggingface.co/codellama/CodeLlama-7b-Instruct-hf) | CodeLLaMA-7B-Python | 0.415 | 0.444 | -0.029 | -0.057 | 0.028 |
+| [CodeLlama-13b-Instruct](https://huggingface.co/codellama/CodeLlama-13b-Instruct-hf) | CodeLLaMA-13B-Python |0.393 |  0.424| -0.031|-0.062 | 0.031 |
+| [CodeLlama-34b-Instruct](https://huggingface.co/codellama/CodeLlama-34b-Instruct-hf) | CodeLLaMA-34B-Python | 0.376 | 0.421 | -0.046 | -0.107 | 0.061 |
+| [Phind-CodeLlama-34B-v1](https://huggingface.co/Phind/Phind-CodeLlama-34B-v1) |CodeLLaMA-34B-Python | 0.435 | 0.453 | -0.018 | -0.107 | 0.089 |
+| [WizardCoder-1B-V1.0](https://huggingface.co/WizardLM/WizardCoder-1B-V1.0) | starcoderbase-1B |0.666 | 0.644 | 0.022 | 0.017 | 0.005 |
+| [WizardCoder-3B-V1.0](https://huggingface.co/WizardLM/WizardCoder-3B-V1.0)  | starcoderbase-3B |0.611 | 0.582 | 0.029 | 0.020 | 0.009 |
+| [WizardCoder-Python-7B-V1.0](https://huggingface.co/WizardLM/WizardCoder-Python-7B-V1.0) |CodeLLaMA-7B-Python | 0.433 | 0.488 | -0.055 | -0.057 | 0.002 |
+| [WizardCoder-Python-13B-V1](https://huggingface.co/WizardLM/WizardCoder-Python-13B-V1.0) |CodeLLaMA-13B-Python | 0.414 | 0.486 | -0.072 | -0.062 | -0.010 |
+| [WizardCoder-15B-V1.0](https://huggingface.co/WizardLM/WizardCoder-15B-V1.0) | StarCoder-15B| 0.564 | 0.537 | 0.027 |0.013 | 0.014 |
+| [WizardCoder-Python-34B-V1.0](https://huggingface.co/WizardLM/WizardCoder-Python-34B-V1.0) |CodeLLaMA-34B-Python | 0.372 | 0.487 | -0.114 | -0.107 | -0.007 |
+| [deepseek-coder-1.3b-instruct](https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-instruct) | deepseek-coder-1.3b-base |0.490 | 0.517 | -0.026 | -0.034 | 0.008 |
+| [deepseek-6.7B-instruct](https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct) | deepseek-coder-7B-base |0.428 | 0.454 | -0.026 | -0.037 | 0.011 |
+| [deepseek-coder-33b-instruct](https://huggingface.co/deepseek-ai/deepseek-coder-33b-instruct) |deepseek-coder-33b-base | 0.368 | 0.399 | -0.032 | -0.034 | 0.002 |
+|[XwinCoder-7B](https://huggingface.co/Xwin-LM/XwinCoder-7B)| CodeLLaMA-7B-Python | 0.525 | 0.536 | -0.011 | -0.057 | 0.046 |
+|[XwinCoder-13B](https://huggingface.co/Xwin-LM/XwinCoder-13B)| CodeLLaMA-13B-Python | 0.405 | 0.468 | -0.062 |-0.062 | 0.000 |
+|[XwinCoder-34B]((https://huggingface.co/Xwin-LM/XwinCoder-34B))|CodeLLaMA-34B-Python |0.406| 0.473 | -0.067 |-0.107 | 0.040 |
 
 To reproduce those results, you can run:
 ```bash

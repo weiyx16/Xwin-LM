@@ -17,19 +17,19 @@ def parse_args():
 
 def set_api(idx):
     openai.api_type = "azure"
-    openai.api_version = "2023-03-15-preview"
+    openai.api_version = "<version>"
     if idx == 0:
-        openai.api_base = "https://gcrgpt4aoai5.openai.azure.com/"
-        openai.api_key = "653880d85b6e4a209206c263d7c3cc7a"
+        openai.api_base = '<base1>'
+        openai.api_key = '<key1>'
     elif idx == 1:
-        openai.api_base = "https://gcrgpt4aoai5.openai.azure.com/"
-        openai.api_key = "3aaf173e3f1b4e7e8bf1756a9bffa600"
+        openai.api_base = '<base2>'
+        openai.api_key = '<key2>'
     elif idx == 2:
-        openai.api_base = "https://gcrgpt4aoai5c.openai.azure.com/"
-        openai.api_key = "7e902a9184ec43d688407c04f1558562"
+        openai.api_base = '<base3>'
+        openai.api_key = '<key3>'
     elif idx == 3:
-        openai.api_base = "https://gcrgpt4aoai5c.openai.azure.com/"
-        openai.api_key = "01c99186da2344b6a3f0f20748e08c73"
+        openai.api_base = '<base4>'
+        openai.api_key = '<key4>'
 
 def generate_prompt(problem, answer):
     return f"""You will be given a code question (which is a function signature with multiline comments to describe its functionality), and the corresponding answer, you are required to mimic to rewrite a different code problem and answer. 

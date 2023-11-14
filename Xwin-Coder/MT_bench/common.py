@@ -389,14 +389,14 @@ def play_a_match_pair(match: MatchPair, output_file: str):
 
 def chat_compeletion_openai(model, messages, temperature, max_tokens):
     openai.api_type = "azure"
-    openai.api_version = "2023-03-15-preview"
+    openai.api_version = os.environ["AZURE_OPENAI_VERSION"]
     openai.api_base = os.environ["AZURE_OPENAI_ENDPOINT"]
     openai.api_key = os.environ["AZURE_OPENAI_KEY"]
     output = API_ERROR_OUTPUT
     for _ in range(API_MAX_RETRY):
         try:
             response = openai.ChatCompletion.create(
-                engine=model+"-32k",
+                engine=model,
                 messages=messages,
                 n=1,
                 temperature=temperature,

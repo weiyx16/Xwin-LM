@@ -1,6 +1,6 @@
 
 # subset name: one of introductory, interview and competition
-SUBSET="competition"  # "competition" "interview""introductory"
+SUBSET="introductory"  # "competition" "interview" "introductory"
 output_path=preds/APPS_$SUBSET
 
 

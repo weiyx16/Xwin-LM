@@ -5,6 +5,7 @@ ID=<model id name>
 
 python gen_model_answer.py --model-path $CKPT --model-id $ID
 
+export AZURE_OPENAI_VERSION=<api version>
 export AZURE_OPENAI_ENDPOINT=<endpoint>
 export AZURE_OPENAI_KEY=<key>
 

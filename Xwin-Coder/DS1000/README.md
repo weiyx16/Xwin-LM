@@ -6,7 +6,7 @@
 
 DS-1000 is a code generation benchmark with a thousand data science questions spanning seven Python libraries that (1) reflects diverse, realistic, and practical use cases, (2) has a reliable metric, (3) defends against memorization by perturbing questions.[[1]](https://ds1000-code-gen.github.io/)
 
-introduce xxx and our results
+Here are the results of our models. Although it is not fully fair to compare our models using different prompt, it is sufficient to say our models show comparable ability with GPT-3.5-turbo and Code-davinci-002 to help users to gain knowledge and provide solutions to those questions about common python packages. 
 
 | Model | Size | Matplotlib | Numpy | Pandas | Pytorch | Scipy | Sklearn | Tensorflow | Overall |
 |----|----|----|----|----|----|----|----|----|----|
@@ -39,7 +39,7 @@ Evaluating using [bigcode-evaluation-harness](https://github.com/bigcode-project
 sudo docker run -it -p 8022:22 -d --name=<docker name> --privileged --net=host --ipc=host --gpus=all -v /:/data superbench/dev:cuda11.8 bash
 sudo docker exec -it <docker name> bash
 cd /data/path/to/Xwin-LM/Xwin-Coder/DS1000
-pip install -r requirements.txt
+pip install -r ds1000_requirements.txt
 bash eval_ds1000.sh
 ```
 

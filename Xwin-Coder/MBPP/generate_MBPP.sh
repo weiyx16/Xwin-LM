@@ -2,20 +2,19 @@
 # generate and evaluate HumanEval in this script
 
 # set your model path that can be read by .from_pretrained() here 
-model="../ckpts/REALEASE_7B/checkpoint-3200"
+model=<model name or path>
 
 # temperature, if using greedy decode, temp=0.0
-temp=0.8
+temp=0.0
 max_len=2048
 
 # Number of predictions, for fast greedy_decode setting, set to 1, for standard setting, set to 200
-pred_num=200
+pred_num=1
 # generation batch size, set it according to your GPU memory, but smaller than pred_num
-num_seqs_per_iter=20
+num_seqs_per_iter=1
 
 # temperary generation path
-# rm -rf preds
-output_path=preds/MBPP_MIX_T${temp}_N${pred_num}
+output_path=preds/MBPP_T${temp}_N${pred_num}
 mkdir -p ${output_path}
 echo 'Output path: '$output_path
 echo 'Model to eval: '$model

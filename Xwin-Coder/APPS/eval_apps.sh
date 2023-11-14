@@ -7,7 +7,7 @@
 # set your model path that can be read by .from_pretrained() here 
 # MD="../ckpts/34B_codellama/checkpoint-3400"
 MD=<model name or path>
-NUM_BEAMS=0
+NUM_BEAMS=1
 N=5
 temp=0.2
 

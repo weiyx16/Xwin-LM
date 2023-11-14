@@ -60,20 +60,9 @@ for idx in tqdm(range(len(files))):
         for code in codes:
             task_id = code['task_id']
             completion = code['completion']
-            # if '```python\n' in completion: 
-            #     completion = completion.split('```python\n')[1]
+
             if '```' in completion: 
                 completion = completion.split('```')[0]
-            
-            # if "solution" in completion.lower():
-            #     solution_idx = completion.lower().index("solution")
-            #     if "#" in completion[max(0,solution_idx-10):solution_idx] and '\n' in completion[solution_idx:]:
-            #         n_idx = completion[solution_idx:].index("\n")
-            #         completion = completion[solution_idx+n_idx+1:]
-
-            # if "__name__ == \"__main__\"" in completion:
-            #     next_line = completion.index('if __name__ == "__main__":')
-            #     completion = completion[:next_line].strip()
             
             if "# Example usage" in completion:
                 next_line = completion.index('# Example usage')
