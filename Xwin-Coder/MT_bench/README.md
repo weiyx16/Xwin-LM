@@ -1,4 +1,4 @@
-# Evaluating MT-Benhch
+# Evaluating MT-Bench
 
 ## Introduction
 

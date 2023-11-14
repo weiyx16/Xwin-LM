@@ -5,7 +5,7 @@
 [![Model Weight License](https://img.shields.io/badge/Model%20Weights%20License-bigscience%20OpenRAIL%20M%20v1-yellow)](MODEL_WEIGHTS_LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/) -->
 
-This folder is used to evaluate and reproduce the results of our code assistent model XwinCoder: A series of models that are instruction- finetuned from open-source pretrained models. Also, this folder can serve as a complete codebase for evaluating code-related capabilities of instruction finetuned models, whereas existing codebases like [bigcode-evaluation-harness](https://github.com/bigcode-project/bigcode-evaluation-harness/tree/main) are mainly designed for pretrained base models. To facilitate the researchers to do ablation experiments and decrease set-up burden, we seperate the evaluation of each task instead of integrating them into a single framework. 
+This folder is used to evaluate and reproduce the results of our code assistent model XwinCoder: A series of models that are instruction-finetuned from open-source pretrained models. Also, this folder can serve as a complete codebase for evaluating code-related capabilities of instruction finetuned models, whereas existing codebases like [bigcode-evaluation-harness](https://github.com/bigcode-project/bigcode-evaluation-harness/tree/main) are mainly designed for pretrained base models. To facilitate the researchers to do ablation experiments and decrease set-up burden, we seperate the evaluation of each task instead of integrating them into a single framework. 
 
 ## Updates
 
@@ -49,7 +49,7 @@ This will install all packages needed during generation. For [DS1000](DS1000/REA
 
 We provide a chat demo for you to quick check the generation performance. Run:
 ```bash
-python online_chater.py --model <model path or name>
+python online_chat.py --model <model path or name>
 ```
 and you can interact with our models. 
 

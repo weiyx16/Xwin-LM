@@ -34,7 +34,7 @@ Download data and unzip from original [repository](https://github.com/HKUNLP/DS-
 bash generate_ds1000.sh
 ```
 ### 2. Check Correctness
-Evaluating using [bigcode-evaluation-harness](https://github.com/bigcode-project/bigcode-evaluation-harness/tree/main) requires a lower version of python. Instead, using the execution of original code is also fast and convenient. We suggest start a new docker and install ds1000 requirements and then run the evaluation scripts
+Evaluating using [bigcode-evaluation-harness](https://github.com/bigcode-project/bigcode-evaluation-harness/tree/main) requires a lower version of python. Instead, using the execution of original code is also fast and convenient. We suggest start a new docker and install DS1000 requirements and then run the evaluation scripts
 ```bash
 sudo docker run -it -p 8022:22 -d --name=<docker name> --privileged --net=host --ipc=host --gpus=all -v /:/data superbench/dev:cuda11.8 bash
 sudo docker exec -it <docker name> bash

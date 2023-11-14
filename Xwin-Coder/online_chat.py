@@ -24,7 +24,7 @@ from rich.style import Style
 # ### Response:
 # """,
 #         "Lazy": input,
-#         "ZMS": f"""
+#         "Author": f"""
 # <user>: 
 # {input}
 # <AI>: """,
@@ -37,7 +37,7 @@ from rich.style import Style
 #     return prompt_dict[prompt_type]
 
 
-class OnlineChater():
+class OnlineChat():
     def __init__(self, args):
         self.model = LLM(model=args.model, dtype = "float16", max_model_len=8192)
         self.tokenizer = AutoTokenizer.from_pretrained(args.model)
@@ -124,11 +124,11 @@ def main():
     parser.add_argument('--vllm', action='store_false', default = True, help='')
     parser.add_argument('--temperature', type=float, default=0.8, help="")
     parser.add_argument('--max_len', type=int, default=2048, help="")
-    parser.add_argument('--prompt-type', type=str, default='ZMS', help="")
+    parser.add_argument('--prompt-type', type=str, default='Author', help="")
 
     args = parser.parse_args()
 
-    chat = OnlineChater(args)
+    chat = OnlineChat(args)
     chat.loop()
 
 if __name__ == "__main__":
