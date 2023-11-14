@@ -9,7 +9,7 @@ This folder is used to evaluate and reproduce the results of our code assistent 
 
 ## Updates
 
-- ❗We released  [**XwinCoder-7B**]((https://huggingface.co/Xwin-LM/XwinCoder-7B)), [**XwinCoder-13B**]((https://huggingface.co/Xwin-LM/XwinCoder-13B)), [**XwinCoder-34B**]((https://huggingface.co/Xwin-LM/XwinCoder-34B))
+- ❗We released  [**XwinCoder-7B**](https://huggingface.co/Xwin-LM/XwinCoder-7B), [**XwinCoder-13B**](https://huggingface.co/Xwin-LM/XwinCoder-13B), [**XwinCoder-34B**](https://huggingface.co/Xwin-LM/XwinCoder-34B)
 
 - ❗We support evaluating instruction finetuned models on [HumanEval](HumanEval/README.md), [MBPP](MBPP/README.mb), [APPS](APPS/README.mb), [DS1000](DS1000/README.mb) and [MT-Bench](MT_bench/README.mb). We also conduct [skywork-data-leakage](SkyWork-Leakage-Testing/README.md) experiments to check whether there are data leakage problems for open source models.
 
