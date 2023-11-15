@@ -36,7 +36,7 @@ We test the $\Delta$ of existing open-source on the huggingface, for pretraining
 
 For instruction finetuned models, we believe it is more fair to consider $\Delta^2 := \Delta_{SFT} - \Delta_{base}$, where $\Delta_{SFT}$ and $\Delta_{base}$ represent the instruction finetuned models and their base models. If $\Delta^2$ is negative, lower $\Delta^2$ shows more serious data leakage issue during instruction finetuning stage.
 
-| Model | Base Model | $L_{test|SFT}$ | $L_{ref|SFT}$ | $\Delta_{SFT}$ |  $\Delta_{base}$ |  $\Delta^2$ | 
+| Model | Base Model | $L_{test\|SFT}$ | $L_{ref\|SFT}$ | $\Delta_{SFT}$ |  $\Delta_{base}$ |  $\Delta^2$ | 
 |---|-------|------------|------------|---|-----------|-------|
 | [CodeLlama-7b-Instruct](https://huggingface.co/codellama/CodeLlama-7b-Instruct-hf) | CodeLLaMA-7B-Python | 0.415 | 0.444 | -0.029 | -0.057 | 0.028 |
 | [CodeLlama-13b-Instruct](https://huggingface.co/codellama/CodeLlama-13b-Instruct-hf) | CodeLLaMA-13B-Python |0.393 |  0.424| -0.031|-0.062 | 0.031 |
@@ -70,7 +70,7 @@ To answer these two questions, we additionally trained models that are exposed t
 
 
 
-| Leakage Method | Base Model | $L_{test}$ | $L_{ref}$ | $\Delta_{SFT}$ |  $\Delta_{base}$ |  $\Delta^2$ |
+| Leakage Method | Base Model | $L_{test\|SFT}$ | $L_{ref\|SFT}$ | $\Delta_{SFT}$ |  $\Delta_{base}$ |  $\Delta^2$ |
 |---|--|----|----|----|----|----|
 |Canonical| CodeLLaMA-7B-Python | 0.354 |  0.467  |  -0.113  | -0.057 | -0.056  |
 |Equivalent| CodeLLaMA-7B-Python | 0.465  |  0.558  |  -0.093  |  -0.057  | -0.036  |
